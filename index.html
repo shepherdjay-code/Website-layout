@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Layout A — email packages</title>
+<title>PrepForTickets — email packages</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -63,11 +63,14 @@
       </div>
       <div style="position: relative; z-index: 2; font-style: italic; font-size: 13.6px; color: #3D3D3A; margin-top: 8px;">each batch contains 750 aliases</div>
     </div>
-    <div id="sec3" style="position: relative; flex: 1; display: flex; align-items: center; justify-content: center; gap: 24px; background-color: #E4D8C4; border-radius: 14px; overflow: hidden;">
+    <div id="sec3" style="position: relative; flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #E4D8C4; border-radius: 14px; overflow: hidden;">
       <svg style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.5; mix-blend-mode: multiply;"><filter id="n3"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence></filter><rect width="100%" height="100%" filter="url(#n3)"></rect></svg>
       <div class="lock-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.18); transition: opacity 0.3s; z-index: 3;"></div>
-      <div style="position: relative; z-index: 2; font-size: 15px; color: #3D3D3A;">order total</div>
-      <div id="order-total" style="position: relative; z-index: 2; font-size: 17px; color: #3D3D3A; font-weight: 500;">-</div>
+      <div style="position: relative; z-index: 2; display: flex; align-items: center; gap: 24px;">
+        <div style="font-size: 15px; color: #3D3D3A;">order total</div>
+        <div id="order-total" style="font-size: 17px; color: #3D3D3A; font-weight: 500;">-</div>
+      </div>
+      <div id="account-count" style="position: relative; z-index: 2; font-style: italic; font-size: 12.75px; color: #3D3D3A; margin-top: 8px;"></div>
     </div>
     <div id="sec4" style="position: relative; flex: 1; display: flex; align-items: center; justify-content: center; background-color: #E4D8C4; border-radius: 14px; overflow: hidden;">
       <svg style="position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.5; mix-blend-mode: multiply;"><filter id="n4"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"></feTurbulence></filter><rect width="100%" height="100%" filter="url(#n4)"></rect></svg>
@@ -114,6 +117,7 @@ wireUp('account-item', 'account-bar', 'account-dropdown');
 function updateTotal() {
   if (!currentTotals) return;
   document.getElementById('order-total').textContent = '\u20ac' + currentTotals[qty - 1].toLocaleString('en-US');
+  document.getElementById('account-count').textContent = 'total account count ' + (qty * 750);
 }
 function unlock(id) {
   var overlay = document.querySelector('#' + id + ' .lock-overlay');
